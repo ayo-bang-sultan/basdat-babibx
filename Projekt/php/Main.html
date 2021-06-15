@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<head>
+    <title>ART</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="Style/layout.css" rel="stylesheet" type="text/css" media="all">
+</head>
+<body id="top">
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <!-- Top Background Image Wrapper -->
+    <div class="bgded overlay padtop" style="background-image:url('Image/Pain.jpg');"> 
+      <!-- ################################################################################################ -->
+      <!-- ################################################################################################ -->
+      <!-- ################################################################################################ -->
+      <header id="header" class="hoc clear">
+        <div id="logo" class="fl_left"> 
+          <!-- ################################################################################################ -->
+          <h1><a href="index.html">l'art</article></a></h1>
+          <!-- ################################################################################################ -->
+        </div>
+        <nav id="mainav" class="fl_right"> 
+            <!-- ################################################################################################ -->
+            <ul class="clear">
+              <li class="active"><a href="index.html">Home</a></li>
+              <li><a class="drop" href="#">Pages</a>
+                <ul>
+                  <li><a href="pages/gallery.html">Gallery</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Log Out <i class="fas fa-sign-out-alt"></i></a></li>
+            </ul>
+            <!-- ################################################################################################ -->
+          </nav>
+      </header>
+        <div id="pageintro" class="hoc clear"> 
+            <!-- ################################################################################################ -->
+            <article>
+              <h3 class="heading">Expand Your Gallery</h3>
+              <footer>
+                <ul class="nospace inline pushright">
+                  <li><a class="btn pop" onclick="openForm()" href="#">Add Product</a></li>
+                </ul>
+              </footer>
+            </article>
+
+            <div class="form-popup" id="myForm">
+                <form action="php/addproduct.php" class="form-container">
+                  <h1>Describe your product</h1>
+              
+                  <label for="Name"><b>Name</b></label>
+                  <input type="text" class="inputext" placeholder="What's your work called" name="ItemName" required>
+
+                  <p>What's the category:</p>
+                    <input type="radio" id="Drawing" name="Categories" value="Drawing">
+                    <label for="Drawing" class="labrad">Drawing</label><br>
+                    <input type="radio" id="Painting" name="Categories" value="Painting">
+                    <label for="Painting" class="labrad">Painting</label><br>
+                    <input type="radio" id="Other" name="Categories" value="Other">
+                    <label for="Other" class="labrad">Other</label>
+              
+                  <label for="Price"><b>Price</b></label>
+                  <input type="text" class="inputext" placeholder="What's the worth ($)" name="Price" required>
+
+                  <label for ="Image"><b>Photo</b></label>
+                  <input type ="file" id="ArtPhoto" name="ArtPhoto">
+
+                  
+              
+                  <button type="submit" class="btn" name="upload">Post</button>
+                  <button type="submit" class="btn cancel" onclick="closeForm()">Cancel</button>
+                </form>
+            </div>
+
+            <!-- ################################################################################################ -->
+        </div>
+          <!-- ################################################################################################ -->
+    </div>
+
+    <div class="wrapper row3">
+        <main class="hoc container clear"> 
+          <!-- main body -->
+          <!-- ################################################################################################ -->
+          <section id="services">
+            <div class="sectiontitle">
+              <h6 class="heading">Your Gallery</h6>
+            </div>
+        
+            <br>
+        
+            <table border="1">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Photo</th>
+                </tr>
+            </thead>
+            <tbody>
+        
+                <?php
+                $query = pg_query("SELECT * FROM uas");
+                // $query = mysqli_query($db, $sql);
+        
+        
+                while($siswa = pg_fetch_array($query)){
+                    echo "<tr>";
+        
+                    echo "<td>".$siswa['ItemID']."</td>";
+                    echo "<td>".$siswa['Item_name']."</td>";
+                    echo "<td>".$siswa['Category']."</td>";
+                    echo "<td>".$siswa['Price']."</td>";
+                    echo "<td>".$siswa['Photo']."</td>";
+        
+                    echo "</tr>";
+        
+                    }
+        
+        
+                ?>
+        
+            </tbody>
+            </table>
+        
+        </main>
+      </div>
+ <script src="Script/Form.js"></script>
+</body>
+</html>
